@@ -25,6 +25,18 @@ const Auth = {
             navigator.credentials.store(credentials);
         }
     },
+
+    loginFromGoogle : async (data)=> {
+        const response=await API.loginFromGoogle({
+            credential:data
+        })
+        Auth.postlogin(response,{
+            name: user.name,
+            email:user.email
+        })
+
+
+    },
     register: async (event) => {
         event.preventDefault();
         const user = {
@@ -39,9 +51,7 @@ const Auth = {
             email: user.email
         });
     },
-    loginFromGoogle:(data)=>{
-        console.log(data)
-    },
+    
     
     login: async (event) => {
         if (event) event.preventDefault();

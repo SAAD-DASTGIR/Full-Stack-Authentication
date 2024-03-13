@@ -55,6 +55,32 @@ app.post("/auth/login",(req,res)=>{
     }
   }
 })
+
+app.post("/auth/login-google",(req,res)=>{
+  let jwt=jwtJsDecode.JwtDecode(req.body.credential.credential)
+  let user ={
+    email:jwt.payload.email,
+    name:jwt.payload.given_name + "" ,
+    password:false 
+  }
+  const userFound=finduser(user.email)
+  if(userFound){
+    user.federated ={
+      google:jwt.payload.aud
+    }
+    db.write()
+    res.send({ok:true,name:user.name,email:user.email})
+  }
+  else{
+    db.data.users.push({
+      ...user,
+      federated:{
+        google:jwt.payload.aud
+      }
+    })
+  }
+
+})
 app.post("/auth/register",(req,res)=>{
   const hashedPassword=bcrypt.hashSync(req.body.password,10);
   const user={
