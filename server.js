@@ -1,4 +1,4 @@
-import express from 'express'
+import  express  from 'express'
 import { Low } from 'lowdb'
 import { JSONFile } from 'lowdb/node'
 import * as url from 'url';
@@ -77,10 +77,9 @@ app.post("/auth/register",(req,res)=>{
 
 
 app.get("*", (req, res) => {
-    res.sendFile(__dirname + "public/index.html"); 
+    res.sendFile(__dirname + "/public/index.html"); 
 });
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 });
-
