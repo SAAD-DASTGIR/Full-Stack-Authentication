@@ -1,3 +1,3 @@
-# Coffee Masters Authentication Demo
+# full stack Authentication flow
 
-This is the initial project for the FullStack Authentication workshop at Frontend Masters
+
